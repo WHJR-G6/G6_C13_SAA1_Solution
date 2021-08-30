@@ -3,6 +3,8 @@ var player,player2;
 var platform,platform2;
 var player_image, platform_image,stone_image;
 
+var platformGroups, stoneGroups;
+
 function preload(){
   player_image=loadImage("images/jack2.png")
   platform_image = loadImage("images/p1.png");
@@ -19,7 +21,10 @@ function setup() {
 
   platform = createSprite(250,350,100,10);
   platform.addImage("platform", platform_image)
-  platform.scale=0.15
+  platform.scale=0.15;
+
+  platformGroups = new Groups();
+  stoneGroups = new Groups();
   
 }
 
@@ -32,8 +37,11 @@ function draw() {
   }
 
   player.velocityY = player.velocityY +0.8;
-  player.collide(platform)
 
+  player.collide(platform);
+
+  player.collide(platformGroups);
+  
   spawnPlatform();
   spawnStone();
   drawSprites();
@@ -51,6 +59,11 @@ function spawnPlatform(){
   platforms.scale = 0.15;
 
   platforms.x = random(0,500);
+
+  platformGroups.add(platforms);
+
+  platforms.lifetime = 100;
+
   }
 }
 
@@ -66,6 +79,12 @@ function spawnStone(){
   stones.scale = 0.4;
 
   stones.x = random(0,500);
+
+  stoneGroups.add(stones);
+
+  platforms.lifetime = 100;
+
+
   }
 }
 
