@@ -82,7 +82,7 @@ function spawnStone(){
 
   stoneGroups.add(stones);
 
-  platforms.lifetime = 100;
+  stones.lifetime = 100;
 
 
   }
